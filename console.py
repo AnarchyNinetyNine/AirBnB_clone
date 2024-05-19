@@ -218,12 +218,12 @@ class HBNBCommand(cmd.Cmd):
         args = line.split('.')
         instances = 0
 
-        if not args[0] in globals():
+        if not args[0] in globals() or len(args) != 2:
             print(f"*** Unknown syntax: {line}")
 
-        if len(args) == 2 and args[1] == "all()":
+        if args[1] == "all()":
             self.do_all(args[0])
-        elif len(args) == 2 and args[1] == "count()":
+        elif args[1] == "count()":
             for key, value in storage.all().items():
                 if key.split('.')[0] == args[0]:
                     instances += 1
@@ -231,6 +231,9 @@ class HBNBCommand(cmd.Cmd):
         elif args[1].startswith("show(") and args[1].endswith(")"):
             instance_id = args[1][5:-1].strip('"')
             self.do_show(f"{args[0]} {instance_id}")
+        elif args[1].startswith("destroy(") and args[1].endswith(")"):
+            instance_id = args[1][8: -1].strip('"')
+            self.do_destroy(f"{args[0]} {instance_id}")
         else:
             print(f"*** Unknown syntax: {line}")
 
