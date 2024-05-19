@@ -212,6 +212,16 @@ class HBNBCommand(cmd.Cmd):
         setattr(obj, attr_name, attr_value)
         obj.save()
 
+    def default(self, line):
+        """Override the default method to handle <class name>.*()"""
+
+        args = line.split('.')
+
+        if len(args) == 2 and args[1] == "all()":
+            self.do_all(args[0])
+        else:
+            print(f"*** Unknown syntax: {line}")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
