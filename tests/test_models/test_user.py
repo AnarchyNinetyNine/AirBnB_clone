@@ -7,8 +7,6 @@ import unittest
 from datetime import datetime
 import sys
 import os
-""" Adjust the path to import User from the models directory """
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from models.user import User
 from models.base_model import BaseModel
 
