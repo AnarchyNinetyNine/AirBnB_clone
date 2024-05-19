@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """ HBNBCommand console for HBNB """
 
 
@@ -14,6 +15,9 @@ from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
+
+    """Command interpreter for HBNB."""
+
     prompt = '(hbnb) '
 
     def do_quit(self, arg):
@@ -213,6 +217,7 @@ class HBNBCommand(cmd.Cmd):
         obj.save()
 
     def default(self, line):
+
         """Override the default method to handle <class name>.*()"""
 
         args = line.split('.')
@@ -220,6 +225,7 @@ class HBNBCommand(cmd.Cmd):
 
         if not args[0] in globals() or len(args) != 2:
             print(f"*** Unknown syntax: {line}")
+            return
 
         if args[1] == "all()":
             self.do_all(args[0])
@@ -232,8 +238,18 @@ class HBNBCommand(cmd.Cmd):
             instance_id = args[1][5:-1].strip('"')
             self.do_show(f"{args[0]} {instance_id}")
         elif args[1].startswith("destroy(") and args[1].endswith(")"):
-            instance_id = args[1][8: -1].strip('"')
+            instance_id = args[1][8:-1].strip('"')
             self.do_destroy(f"{args[0]} {instance_id}")
+        elif args[1].startswith("update(") and args[1].endswith(")"):
+            params = args[1][7:-1].split(', ')
+            if len(params) == 3:
+                instance_id = params[0].strip('"')
+                attr_name = params[1].strip('"')
+                attr_value = params[2].strip('"')
+                elf.do_update(
+                        f"{args[0]} {instance_id} {attr_name} {attr_value}")
+            else:
+                print(f"*** Unknown syntax: {line}")
         else:
             print(f"*** Unknown syntax: {line}")
 
