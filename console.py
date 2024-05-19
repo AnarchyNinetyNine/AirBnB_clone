@@ -246,8 +246,8 @@ class HBNBCommand(cmd.Cmd):
                 instance_id = params[0].strip('"')
                 attr_name = params[1].strip('"')
                 attr_value = params[2].strip('"')
-                elf.do_update(
-                        f"{args[0]} {instance_id} {attr_name} {attr_value}")
+                command = f"{args[0]} {instance_id} {attr_name} {attr_value}"
+                self.do_update(command)
             else:
                 print(f"*** Unknown syntax: {line}")
         else:
