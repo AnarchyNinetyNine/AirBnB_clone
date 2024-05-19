@@ -216,9 +216,18 @@ class HBNBCommand(cmd.Cmd):
         """Override the default method to handle <class name>.*()"""
 
         args = line.split('.')
+        instances = 0
+
+        if not args[0] in globals():
+            print(f"*** Unknown syntax: {line}")
 
         if len(args) == 2 and args[1] == "all()":
             self.do_all(args[0])
+        elif len(args) == 2 and args[1] == "count()":
+            for key, value in storage.all().items():
+                if key.split('.')[0] == args[0]:
+                    instances += 1
+            print(instances)
         else:
             print(f"*** Unknown syntax: {line}")
 
