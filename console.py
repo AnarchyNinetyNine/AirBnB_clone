@@ -228,6 +228,9 @@ class HBNBCommand(cmd.Cmd):
                 if key.split('.')[0] == args[0]:
                     instances += 1
             print(instances)
+        elif args[1].startswith("show(") and args[1].endswith(")"):
+            instance_id = args[1][5:-1].strip('"')
+            self.do_show(f"{args[0]} {instance_id}")
         else:
             print(f"*** Unknown syntax: {line}")
 
