@@ -5,14 +5,7 @@ header {
     border-bottom: 1px solid #CCCCCC;
     display: flex;
     align-items: center;
-}
-
-.logo{
-    position: relative;
-    height: 100%;
-    width: 100%;
+    background-position: 20px center;
     background-image: url(../images/logo.png);
-	background-repeat: no-repeat;
-    background-size: contain; /* Ensures the logo is resized to fit within the div */
-    margin-left: 20px;
+    background-repeat: no-repeat;
 }
